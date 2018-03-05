@@ -1,0 +1,11 @@
+<resources>
+
+    <!-- 自定义LoadingDialog的样式 -->
+    <style name="LoadingDialogStyle">
+        <!--背景透明以展示圆角边框-->
+        <item name="android:windowBackground">@android:color/transparent</item>
+        <!--悬浮样式-->
+        <item name="android:windowIsFloating">true</item>
+    </style>
+
+</resources>
