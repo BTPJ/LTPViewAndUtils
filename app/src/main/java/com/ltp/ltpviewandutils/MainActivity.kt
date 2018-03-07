@@ -1,6 +1,6 @@
 package com.ltp.ltpviewandutils
 
-import android.support.v7.app.AppCompatActivity
+import android.app.Activity
 import android.os.Bundle
 import com.ltp.viewandutils.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
@@ -10,7 +10,7 @@ import kotlinx.android.synthetic.main.activity_main.*
  *
  * @author LTP 2018/3/2
  */
-class MainActivity : AppCompatActivity() {
+class MainActivity : Activity() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
