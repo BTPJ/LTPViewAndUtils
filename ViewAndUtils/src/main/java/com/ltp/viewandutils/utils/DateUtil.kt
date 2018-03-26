@@ -206,10 +206,10 @@ object DateUtil {
     }
 
     /**
-     * 将时间对象转换为短时间格式的字符串 yyyy-MM-dd
+     * 将时间对象转换为HH:mm时间格式的字符串
      *
      * @param dateDate 时间对象
-     * @return 短时间格式的字符串 yyyy-MM-dd
+     * @return HH:mm时间格式的字符串
      */
     fun dateToStrHour(dateDate: Date): String {
         return SimpleDateFormat("HH:mm", Locale.getDefault()).format(dateDate)

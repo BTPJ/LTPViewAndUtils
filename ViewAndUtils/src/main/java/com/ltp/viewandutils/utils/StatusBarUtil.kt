@@ -6,6 +6,7 @@ import android.view.WindowManager
 
 /**
  * 屏幕相关工具类
+ *   1.设置沉浸式任务栏
  *
  * @author LTP 16/9/21.
  */
