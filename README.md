@@ -11,3 +11,4 @@
 4.KeyboardUtil:键盘相关工具类
 5.DeviceUtil:判断设备工具类
 6.StatusBarUtil:通知栏相关工具类(包括沉浸式等效果)
+7.LogUtil:日志工具类
