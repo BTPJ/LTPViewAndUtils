@@ -111,7 +111,7 @@ object DateUtil {
      */
     val nowDateFileName: String
         get() {
-            val formatter = SimpleDateFormat("yyyyMMdd_HHmmss", Locale.getDefault())
+            val formatter = SimpleDateFormat("yyyyMMddHHmmss", Locale.getDefault())
             return formatter.format(Date())
         }
 
@@ -143,10 +143,9 @@ object DateUtil {
         }
 
     /**
-     * 功能：<br></br>
+     * 得到现在时间
      *
-     * @author Tony
-     * @version 2016年12月16日 下午4:41:51 <br></br>
+     * @return 字符串 yyyyMMdd
      */
     val todayShort: String
         get() {
@@ -392,13 +391,12 @@ object DateUtil {
      */
     fun getNextDay(nowdate: String, delay: String): String {
         return try {
-            var mdate = ""
             val d = strToDateShort(nowdate)
             val myTime = d.time / 1000 + Integer.parseInt(delay) * 24 * 60 * 60
             d.time = myTime * 1000
-            mdate = SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(d)
-            mdate
+            SimpleDateFormat("yyyy-MM-dd", Locale.getDefault()).format(d)
         } catch (e: Exception) {
+            e.printStackTrace()
             ""
         }
 

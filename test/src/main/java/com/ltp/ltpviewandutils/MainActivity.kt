@@ -3,6 +3,7 @@ package com.ltp.ltpviewandutils
 import android.app.Activity
 import android.os.Bundle
 import com.ltp.viewandutils.utils.ToastUtil
+import com.ltp.viewandutils.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
 /**
@@ -18,7 +19,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
         tv_test.setOnClickListener {
-            //            LoadingDialog.Builder(this).create().show()
+            LoadingDialog.Builder(this).create().show()
             ToastUtil.showShort(this, "测试${i++}")
         }
     }
