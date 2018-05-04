@@ -2,6 +2,7 @@ package com.ltp.ltpviewandutils
 
 import android.app.Activity
 import android.os.Bundle
+import android.widget.TextView
 import com.ltp.viewandutils.utils.ToastUtil
 import com.ltp.viewandutils.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
@@ -21,6 +22,11 @@ class MainActivity : Activity() {
         tv_test.setOnClickListener {
             LoadingDialog.Builder(this).create().show()
             ToastUtil.showShort(this, "测试${i++}")
+        }
+        for (i in 1..20) {
+            val textView = TextView(this)
+            textView.text = "测试$i"
+            flow.addView(textView)
         }
     }
 }

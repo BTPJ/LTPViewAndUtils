@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+
+    <!--FlowLayout流式布局-->
+    <declare-styleable name="FlowLayout">
+        <attr name="android:gravity" />
+        <attr name="android:maxLines" format="integer" />
+        <attr name="childHorizontalSpacing" format="dimension" />
+        <attr name="childVerticalSpacing" format="dimension" />
+        <attr name="maxNumber" format="integer" />
+    </declare-styleable>
+
+</resources>
