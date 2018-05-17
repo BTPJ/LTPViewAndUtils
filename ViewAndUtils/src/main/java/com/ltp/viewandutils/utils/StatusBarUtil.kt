@@ -25,5 +25,6 @@ object StatusBarUtil {
             // 4.0-4.4由于Title的padingTop的原因直接设置成全屏
             activity.window.addFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN)
         }
+        EditWithStatusBugUtil.dealEditWithStatusBug(activity)
     }
 }
