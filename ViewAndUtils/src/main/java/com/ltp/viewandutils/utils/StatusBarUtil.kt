@@ -27,4 +27,5 @@ object StatusBarUtil {
         }
         EditWithStatusBugUtil.dealEditWithStatusBug(activity)
     }
+
 }
