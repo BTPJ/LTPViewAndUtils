@@ -2,6 +2,7 @@ package com.ltp.viewandutils.utils
 
 import android.app.Activity
 import android.graphics.Rect
+import android.os.Build
 import android.view.View
 import android.widget.FrameLayout
 
@@ -35,12 +36,12 @@ class EditWithStatusBugUtil(activity: Activity) {
     init {
         val content = activity.findViewById(android.R.id.content) as FrameLayout
         mChildOfContent = content.getChildAt(0)
-        mChildOfContent.viewTreeObserver.addOnGlobalLayoutListener { possiblyResizeChildOfContent() }
+        mChildOfContent.viewTreeObserver.addOnGlobalLayoutListener { possiblyResizeChildOfContent(activity) }
         frameLayoutParams = mChildOfContent.layoutParams as FrameLayout.LayoutParams
     }
 
-    private fun possiblyResizeChildOfContent() {
-        val usableHeightNow = computeUsableHeight()
+    private fun possiblyResizeChildOfContent(activity: Activity) {
+        val usableHeightNow = computeUsableHeight(activity)
         if (usableHeightNow != usableHeightPrevious) {
             val usableHeightSansKeyboard = mChildOfContent.rootView.height
             val heightDifference = usableHeightSansKeyboard - usableHeightNow
@@ -56,10 +57,17 @@ class EditWithStatusBugUtil(activity: Activity) {
         }
     }
 
-    private fun computeUsableHeight(): Int {
+    private fun computeUsableHeight(activity: Activity): Int {
+        val frame = Rect()
+        activity.window.decorView.getWindowVisibleDisplayFrame(frame)
+        val statusBarHeight = frame.top
         val r = Rect()
         mChildOfContent.getWindowVisibleDisplayFrame(r)
-        return r.bottom - r.top
-    }
 
+        //这个判断是为了解决19之后的版本在弹出软键盘时，键盘和推上去的布局（adjustResize）之间有黑色区域的问题
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
+            return (r.bottom - r.top) + statusBarHeight
+        }
+        return (r.bottom - r.top)
+    }
 }
