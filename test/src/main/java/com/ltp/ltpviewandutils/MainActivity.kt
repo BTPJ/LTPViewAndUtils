@@ -1,8 +1,10 @@
 package com.ltp.ltpviewandutils
 
+import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.widget.TextView
+import com.ltp.viewandutils.utils.StatusBarUtil
 import com.ltp.viewandutils.utils.ToastUtil
 import com.ltp.viewandutils.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
@@ -14,11 +16,14 @@ import kotlinx.android.synthetic.main.activity_main.*
  */
 class MainActivity : Activity() {
 
-    var i = 0
+    private var i = 0
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+//        StatusBarUtil.setImmersionStatus(this)
+        StatusBarUtil.setStatusBarLightMode(this)
         tv_test.setOnClickListener {
             LoadingDialog.Builder(this).create().show()
             ToastUtil.showShort(this, "测试${i++}")
