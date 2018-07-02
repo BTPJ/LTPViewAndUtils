@@ -82,7 +82,7 @@ class EditWithStatusBugUtil(activity: Activity) {
                     frameLayoutParams.height = usableHeightSansKeyboard - heightDifference
                 }
             } else {
-                frameLayoutParams.height = usableHeightSansKeyboard
+                frameLayoutParams.height = contentHeight
             }
             // 7､ 重绘Activity的xml布局
             mChildOfContent.requestLayout()
