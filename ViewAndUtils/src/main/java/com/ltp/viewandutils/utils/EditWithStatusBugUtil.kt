@@ -11,7 +11,7 @@ import android.widget.FrameLayout
  * Android的一个Bug:当设置沉浸式通知栏后，弹出的软键盘会挡住底部的EditText，而不是推上去
  *
  * 调用EditWithStatusBugUtil.dealEditWithStatusBug(this)即可
- * 参考：https://www.jianshu.com/p/87795b9cda4b
+ * 参考：https://www.jianshu.com/p/87795b9cda4b、https://blog.csdn.net/smileiam/article/details/69055963
  *
  * @author LTP  2018/5/17
  */
