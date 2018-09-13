@@ -10,4 +10,9 @@
         <attr name="maxNumber" format="integer" />
     </declare-styleable>
 
+    <!--可设置最大高度的WrapScrollView的相关属性-->
+    <declare-styleable name="WrapScrollView">
+        <!--最大高度占屏幕的比例(默认是0.5)-->
+        <attr name="maxHeightRatio" format="float" />
+    </declare-styleable>
 </resources>
