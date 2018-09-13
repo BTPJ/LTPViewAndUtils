@@ -4,6 +4,7 @@
 一、View
 1.LoadingDialog:模仿ios的请求网络的加载框
 2.FlowLayout:流式布局
+3.WrapScrollView:可设置最大高度占屏幕比例的ScrollView
 
 二、Utils
 1.SharePreferensUtil:封装的SharePreferens的工具
