@@ -24,7 +24,7 @@ class MainActivity : Activity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 //        StatusBarUtil.setImmersionStatus(this)
-        StatusBarUtil.setStatusBarMode(this, true)
+        StatusBarUtil.setStatusBarLightMode(this)
         tv_test.setOnClickListener {
             LoadingDialog.Builder(this).create().show()
             ToastUtil.showShort(this, "测试${i++}")

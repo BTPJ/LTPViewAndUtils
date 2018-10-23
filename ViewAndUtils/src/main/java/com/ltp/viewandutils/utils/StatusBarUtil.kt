@@ -29,16 +29,24 @@ object StatusBarUtil {
     }
 
     /**
-     * 设置Android6.0上状态栏的字体颜色
+     * 设置Android6.0上状态栏的字体颜色为黑色
      *
      * @param activity Activity
-     * @param isDark 是否是黑色（true:黑色 false:白色）
      */
-    fun setStatusBarMode(activity: Activity, isDark: Boolean) {
+    fun setStatusBarLightMode(activity: Activity) {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            activity.window.decorView.systemUiVisibility =
-                    if (isDark) View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
-                    else View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
+            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN or View.SYSTEM_UI_FLAG_LIGHT_STATUS_BAR
+        }
+    }
+
+    /**
+     * 设置Android6.0上状态栏的字体颜色为黑色
+     *
+     * @param activity Activity
+     */
+    fun setStatusBarDarkMode(activity: Activity) {
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
     }
 }
