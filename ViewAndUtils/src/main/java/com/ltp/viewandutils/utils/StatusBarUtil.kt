@@ -2,6 +2,7 @@ package com.ltp.viewandutils.utils
 
 import android.app.Activity
 import android.os.Build
+import android.util.DisplayMetrics
 import android.view.View
 import android.view.WindowManager
 
@@ -48,5 +49,28 @@ object StatusBarUtil {
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
             activity.window.decorView.systemUiVisibility = View.SYSTEM_UI_FLAG_LAYOUT_FULLSCREEN
         }
+    }
+
+
+    /**
+     * 通过反射，获取包含虚拟键的整体屏幕高度
+     *
+     * @return 包含虚拟键的整体屏幕高度
+     */
+    fun getScreenRealHeight(activity: Activity): Int {
+        var dpi = 0
+        val display = activity.windowManager.defaultDisplay
+        val dm = DisplayMetrics()
+        val c: Class<*>
+        try {
+            c = Class.forName("android.view.Display")
+            val method = c.getMethod("getRealMetrics", DisplayMetrics::class.java)
+            method.invoke(display, dm)
+            dpi = dm.heightPixels
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return dpi
     }
 }
