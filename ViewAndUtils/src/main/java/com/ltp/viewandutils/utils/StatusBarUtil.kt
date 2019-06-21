@@ -1,6 +1,7 @@
 package com.ltp.viewandutils.utils
 
 import android.app.Activity
+import android.content.Context
 import android.os.Build
 import android.util.DisplayMetrics
 import android.view.View
@@ -72,5 +73,13 @@ object StatusBarUtil {
         }
 
         return dpi
+    }
+
+    /**
+     * 获取手机状态栏的高度
+     */
+    fun getStatusBarHeight(context: Context): Int {
+        val resourceId = context.resources.getIdentifier("status_bar_height", "dimen", "android")
+        return context.resources.getDimensionPixelSize(resourceId)
     }
 }

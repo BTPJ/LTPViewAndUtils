@@ -1,6 +1,7 @@
 package com.ltp.viewandutils.view
 
 import android.annotation.SuppressLint
+import android.app.AlertDialog
 import android.app.Dialog
 import android.content.Context
 import android.view.LayoutInflater
