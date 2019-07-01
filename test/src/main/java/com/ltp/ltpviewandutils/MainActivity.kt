@@ -26,8 +26,9 @@ class MainActivity : Activity() {
 //        StatusBarUtil.setImmersionStatus(this)
         StatusBarUtil.setStatusBarLightMode(this)
         tv_test.setOnClickListener {
-            LoadingDialog.Builder(this).create().show()
-            ToastUtil.showShort(this, "测试${i++}")
+            //            LoadingDialog.Builder(this).create().show()
+//            ToastUtil.showShort(this, "测试${i++}")
+            LoadingDialog.with(this).setMessage("hah").show()
         }
         for (i in 1..20) {
             val textView = TextView(this)
