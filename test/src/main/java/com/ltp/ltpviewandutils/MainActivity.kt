@@ -4,9 +4,7 @@ import android.annotation.SuppressLint
 import android.app.Activity
 import android.os.Bundle
 import android.widget.TextView
-import com.ltp.viewandutils.utils.DensityUtil
-import com.ltp.viewandutils.utils.StatusBarUtil
-import com.ltp.viewandutils.utils.ToastUtil
+import com.ltp.viewandutils.utils.*
 import com.ltp.viewandutils.view.LoadingDialog
 import kotlinx.android.synthetic.main.activity_main.*
 
@@ -30,6 +28,7 @@ class MainActivity : Activity() {
 //            ToastUtil.showShort(this, "测试${i++}")
             LoadingDialog.with(this).setMessage("hah").show()
         }
+        LogUtil.d("缓存大小" + FileUtil.getTotalCacheSize(this))
         for (i in 1..20) {
             val textView = TextView(this)
             textView.text = "测试$i"

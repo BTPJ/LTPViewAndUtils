@@ -1,6 +1,10 @@
 package com.ltp.viewandutils.utils
 
+import android.content.Context
+import android.os.Environment
 import java.io.File
+import android.os.Environment.MEDIA_MOUNTED
+
 
 /**
  * 文件相关工具类
@@ -10,9 +14,59 @@ import java.io.File
 object FileUtil {
 
     /**
+     * 获取缓存大小
+     * @param context
+     * @return
+     * @throws Exception
+     */
+    @Throws(Exception::class)
+    fun getTotalCacheSize(context: Context): String {
+        var cacheSize = getFolderSize(context.cacheDir)
+        if (Environment.getExternalStorageState() == MEDIA_MOUNTED) {
+            cacheSize += getFolderSize(context.externalCacheDir!!)
+        }
+        return getFormatSize(cacheSize)
+    }
+
+    /**
+     * 清除缓存
+     * @param context
+     */
+    fun clearAllCache(context: Context) {
+        delete(context.cacheDir.absolutePath)
+        if (Environment.getExternalStorageState() == MEDIA_MOUNTED) {
+            delete(context.externalCacheDir!!.absolutePath)
+        }
+    }
+
+    /**
+     * 获取文件大小
+     *
+     * @param file File
+     */
+    @Throws(Exception::class)
+    fun getFolderSize(file: File): Long {
+        var size: Long = 0
+        try {
+            val fileList = file.listFiles()
+            for (i in fileList.indices) {
+                // 如果下面还有文件
+                size += if (fileList[i].isDirectory) {
+                    getFolderSize(fileList[i])
+                } else {
+                    fileList[i].length()
+                }
+            }
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+        return size
+    }
+
+    /**
      * 转换文件大小B-KB-MB-GB
      */
-    fun getPrintSize(size: Long): String {
+    fun getFormatSize(size: Long): String {
         var newSize = size
         //如果字节数少于1024，则直接以B为单位，否则先除于1024，后3位因太少无意义
         if (newSize < 1024) {
