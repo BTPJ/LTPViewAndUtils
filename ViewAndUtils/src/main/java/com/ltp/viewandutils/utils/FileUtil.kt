@@ -1,9 +1,12 @@
 package com.ltp.viewandutils.utils
 
+import android.content.ContentResolver
 import android.content.Context
+import android.net.Uri
 import android.os.Environment
 import java.io.File
 import android.os.Environment.MEDIA_MOUNTED
+import android.provider.MediaStore
 
 
 /**
@@ -15,11 +18,10 @@ object FileUtil {
 
     /**
      * 获取缓存大小
-     * @param context
-     * @return
-     * @throws Exception
+     *
+     * @param context Context
+     * @return 缓存大小
      */
-    @Throws(Exception::class)
     fun getTotalCacheSize(context: Context): String {
         var cacheSize = getFolderSize(context.cacheDir)
         if (Environment.getExternalStorageState() == MEDIA_MOUNTED) {
@@ -30,7 +32,8 @@ object FileUtil {
 
     /**
      * 清除缓存
-     * @param context
+     *
+     * @param context Context
      */
     fun clearAllCache(context: Context) {
         delete(context.cacheDir.absolutePath)
@@ -44,7 +47,6 @@ object FileUtil {
      *
      * @param file File
      */
-    @Throws(Exception::class)
     fun getFolderSize(file: File): Long {
         var size: Long = 0
         try {
@@ -96,7 +98,59 @@ object FileUtil {
         }
     }
 
-    /** 删除文件，可以是文件或文件夹
+    /**
+     * 创建文件夹并返回路径
+     *
+     * @param dirPath 文件夹路径
+     *
+     * @return 返回的文件夹路径
+     */
+    fun createDirectoryPath(dirPath: String): String {
+        if (dirPath.isEmpty()) {
+            return ""
+        }
+        val dir = File(dirPath)
+        if (!dir.exists()) {
+            dir.mkdirs()
+        }
+        return dirPath
+    }
+
+    /**
+     * 根据Uri返回文件绝对路径(兼容了file:///开头的 和 content://开头的情况)
+     *
+     * @param context Context
+     * @param uri 文件Uri
+     * @return 文件绝对路径
+     */
+    fun getRealFilePathFromUri(context: Context, uri: Uri?): String? {
+        if (null == uri) {
+            return null
+        }
+        val scheme = uri.scheme
+        var data: String? = null
+        if (scheme == null) {
+            data = uri.path
+        } else if (ContentResolver.SCHEME_FILE.equals(scheme, ignoreCase = true)) {
+            data = uri.path
+        } else if (ContentResolver.SCHEME_CONTENT.equals(scheme, ignoreCase = true)) {
+            val cursor = context.contentResolver.query(uri, arrayOf(MediaStore.Images.ImageColumns.DATA), null, null, null)
+            if (null != cursor) {
+                if (cursor.moveToFirst()) {
+                    val index = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA)
+                    if (index > -1) {
+                        data = cursor.getString(index)
+                    }
+                }
+                cursor.close()
+            }
+        }
+        return data
+    }
+
+    /**
+     * 删除文件，可以是文件或文件夹
+     *
      * @param delFile 要删除的文件夹或文件名
      * @return 删除成功返回true，否则返回false
      */
@@ -113,7 +167,9 @@ object FileUtil {
         }
     }
 
-    /** 删除单个文件
+    /**
+     * 删除单个文件
+     *
      * @param filePath 要删除的文件的文件名
      * @return 单个文件删除成功返回true，否则返回false
      */
@@ -134,7 +190,9 @@ object FileUtil {
         }
     }
 
-    /** 删除目录及目录下的文件
+    /**
+     * 删除目录及目录下的文件
+     *
      * @param filePath 要删除的目录的文件路径
      * @return 目录删除成功返回true，否则返回false
      */
