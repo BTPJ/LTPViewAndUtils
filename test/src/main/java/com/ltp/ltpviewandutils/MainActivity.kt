@@ -24,9 +24,8 @@ class MainActivity : Activity() {
 //        StatusBarUtil.setImmersionStatus(this)
         StatusBarUtil.setStatusBarLightMode(this)
         tv_test.setOnClickListener {
-            //            LoadingDialog.Builder(this).create().show()
+            LoadingDialog.Builder(this).create().show()
 //            ToastUtil.showShort(this, "测试${i++}")
-            LoadingDialog.with(this).setMessage("hah").show()
         }
         LogUtil.d("缓存大小" + FileUtil.getTotalCacheSize(this))
         for (i in 1..20) {
