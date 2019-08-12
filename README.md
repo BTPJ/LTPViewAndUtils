@@ -13,4 +13,4 @@
 4.DeviceUtil:判断设备工具类
 5.StatusBarUtil:通知栏相关工具类(包括沉浸式等效果)
 6.LogUtil:日志工具类
-7.DensityUtil:屏幕尺寸相关工具类
+7.ScreenUtil:屏幕尺寸相关工具类
