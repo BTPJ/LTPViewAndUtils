@@ -20,9 +20,11 @@ object DimenCreate {
         val smallest = if (DESIGN_WIDTH > DESIGN_HEIGHT) DESIGN_HEIGHT else DESIGN_WIDTH  //     求得最小宽度
         // 要生成的dimens文件的最小宽度（Smallest-width）限定符
         val values = intArrayOf(300, 310, 320, 330, 330, 340, 350, 360, 370, 384, 390, 400, 411, 420, 432, 440, 450, 480, 533, 600)
+        val directory = File("MyValuesDp")
         for (value in values) {
-            val directory = File("MyValues")//为了方便，设定为当前文件夹，dimens文件将会生成项目所在文件夹中，用户可自行更改
+            //为了方便，设定为当前文件夹，dimens文件将会生成项目所在文件夹中，用户可自行更改
             DimenCreateManager.makeAll(smallest, value, directory.absolutePath)
         }
+        print("生成成功,目录为:${directory.absolutePath}")
     }
 }

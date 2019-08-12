@@ -34,7 +34,7 @@ class MainActivity : Activity() {
             flow.addView(textView)
         }
 
-        tv_test.text = "屏幕高度：${DensityUtil.getScreenHeight(this)}\n屏幕宽度：${DensityUtil.getScreenWidth(this)}\n" +
-                "屏幕密度：${DensityUtil.getScreenDensity(this)}"
+        tv_test.text = "屏幕高度：${ScreenUtil.getScreenHeight(this)}\n屏幕宽度：${ScreenUtil.getScreenWidth(this)}\n" +
+                "屏幕密度：${ScreenUtil.getScreenDensity(this)}"
     }
 }

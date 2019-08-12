@@ -4,7 +4,7 @@ import android.content.Context
 import android.util.AttributeSet
 import android.widget.ScrollView
 import com.ltp.viewandutils.R
-import com.ltp.viewandutils.utils.DensityUtil
+import com.ltp.viewandutils.utils.ScreenUtil
 
 /**
  * 可设置最大高度占据屏幕比例的ScrollView(超过可滑动),最小高度为自适应子控件的高度
@@ -25,7 +25,7 @@ class WrapScrollView(context: Context?, attrs: AttributeSet?) : ScrollView(conte
     override fun onMeasure(widthMeasureSpec: Int, heightMeasureSpec: Int) {
         var newHeightMeasureSpec = heightMeasureSpec
         try {
-            newHeightMeasureSpec = MeasureSpec.makeMeasureSpec((DensityUtil.getScreenHeight(context) * maxHeightRatio).toInt(), MeasureSpec.AT_MOST)
+            newHeightMeasureSpec = MeasureSpec.makeMeasureSpec((ScreenUtil.getScreenHeight(context) * maxHeightRatio).toInt(), MeasureSpec.AT_MOST)
         } catch (e: Exception) {
             e.printStackTrace()
         }

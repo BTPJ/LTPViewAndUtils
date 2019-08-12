@@ -1,15 +1,16 @@
 package com.ltp.viewandutils.utils
 
+import android.app.Activity
 import android.content.Context
+import android.util.DisplayMetrics
 import android.util.TypedValue
-
 
 /**
  * 屏幕、尺寸相关工具类
  *
  * @author LTP  2018/8/6
  */
-object DensityUtil {
+object ScreenUtil {
 
     /**
      * dp转px
@@ -84,5 +85,28 @@ object DensityUtil {
      */
     fun getScreenDensity(context: Context): Float {
         return context.resources.displayMetrics.density
+    }
+
+
+    /**
+     * 通过反射，获取包含虚拟键的整体屏幕高度
+     *
+     * @return 包含虚拟键的整体屏幕高度
+     */
+    fun getScreenRealHeight(activity: Activity): Int {
+        var dpi = 0
+        val display = activity.windowManager.defaultDisplay
+        val dm = DisplayMetrics()
+        val c: Class<*>
+        try {
+            c = Class.forName("android.view.Display")
+            val method = c.getMethod("getRealMetrics", DisplayMetrics::class.java)
+            method.invoke(display, dm)
+            dpi = dm.heightPixels
+        } catch (e: Exception) {
+            e.printStackTrace()
+        }
+
+        return dpi
     }
 }

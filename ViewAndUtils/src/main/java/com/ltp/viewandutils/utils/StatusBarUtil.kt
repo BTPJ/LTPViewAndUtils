@@ -52,29 +52,6 @@ object StatusBarUtil {
         }
     }
 
-
-    /**
-     * 通过反射，获取包含虚拟键的整体屏幕高度
-     *
-     * @return 包含虚拟键的整体屏幕高度
-     */
-    fun getScreenRealHeight(activity: Activity): Int {
-        var dpi = 0
-        val display = activity.windowManager.defaultDisplay
-        val dm = DisplayMetrics()
-        val c: Class<*>
-        try {
-            c = Class.forName("android.view.Display")
-            val method = c.getMethod("getRealMetrics", DisplayMetrics::class.java)
-            method.invoke(display, dm)
-            dpi = dm.heightPixels
-        } catch (e: Exception) {
-            e.printStackTrace()
-        }
-
-        return dpi
-    }
-
     /**
      * 获取手机状态栏的高度
      */
