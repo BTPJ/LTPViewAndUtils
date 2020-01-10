@@ -15,25 +15,23 @@ object SharedPreferencesUtil {
      */
     private const val FILE_NAME = "share_data"
 
-    @Suppress("CAST_NEVER_SUCCEEDS")
-            /**
-             * 写入数据并保存的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
-             *
-             * @param context 上下文
-             * @param key     键
-             * @param value   值
-             */
-    fun writeData(context: Context, key: String, value: String) {
+    /**
+     * 写入数据并保存的方法，我们需要拿到保存数据的具体类型，然后根据类型调用不同的保存方法
+     *
+     * @param context 上下文
+     * @param key     键
+     * @param value   值
+     */
+    fun writeData(context: Context, key: String, value: Any) {
         // 获取要存储数据的封装类名
-        val type = value.javaClass.simpleName
         val sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
-        when (type) {
-            "String" -> editor.putString(key, value as String)
-            "Integer" -> editor.putInt(key, value as Int)
-            "Float" -> editor.putFloat(key, value as Float)
-            "Boolean" -> editor.putBoolean(key, value as Boolean)
-            "Long" -> editor.putLong(key, value as Long)
+        when (value) {
+            is String -> editor.putString(key, value)
+            is Int -> editor.putInt(key, value)
+            is Float -> editor.putFloat(key, value)
+            is Boolean -> editor.putBoolean(key, value)
+            is Long -> editor.putLong(key, value)
             else -> Toast.makeText(context, "不支持存储此类型的对象", Toast.LENGTH_SHORT).show()
         }
         editor.apply()
@@ -48,14 +46,13 @@ object SharedPreferencesUtil {
      * @return 存储的对象
      */
     fun readData(context: Context, key: String, defValue: Any): Any? {
-        val type = defValue.javaClass.simpleName
         val sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        return when (type) {
-            "String" -> sharedPreferences.getString(key, defValue as String)
-            "Integer" -> sharedPreferences.getInt(key, defValue as Int)
-            "Float" -> sharedPreferences.getFloat(key, defValue as Float)
-            "Boolean" -> sharedPreferences.getBoolean(key, defValue as Boolean)
-            "Long" -> sharedPreferences.getLong(key, defValue as Long)
+        return when (defValue) {
+            is String -> sharedPreferences.getString(key, defValue)
+            is Int -> sharedPreferences.getInt(key, defValue)
+            is Float -> sharedPreferences.getFloat(key, defValue)
+            is Boolean -> sharedPreferences.getBoolean(key, defValue)
+            is Long -> sharedPreferences.getLong(key, defValue)
             else -> null
         }
     }
