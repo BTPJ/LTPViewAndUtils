@@ -70,7 +70,8 @@ object ToastUtil {
     @SuppressLint("ShowToast")
     private fun initShortToast(context: Context, msg: String) {
         if (mToast == null) {
-            mToast = Toast.makeText(context, msg, Toast.LENGTH_SHORT)
+            // 由于mToast是静态的，这里使用applicationContext,防止使用时传入Activity或Fragment的context造成内存泄漏
+            mToast = Toast.makeText(context.applicationContext, msg, Toast.LENGTH_SHORT)
         } else {
             mToast!!.setText(msg)
         }
