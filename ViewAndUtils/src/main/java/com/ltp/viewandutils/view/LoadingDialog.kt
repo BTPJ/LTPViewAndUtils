@@ -22,10 +22,13 @@ class LoadingDialog(context: Context, themeResId: Int) : Dialog(context, themeRe
 
         /** 加载框下方的提示信息(默认为加载中...) */
         private var message = "加载中..."
+
         /** 是否显示加载框下方的提示信息(默认显示) */
         private var isShowMessage = true
+
         /** 是否点击返回键取消显示加载框(默认不取消) */
         private var isCancelable = true
+
         /** 是否点击加载框以外取消显示加载框(默认不取消) */
         private var isCancelOutside = false
 
