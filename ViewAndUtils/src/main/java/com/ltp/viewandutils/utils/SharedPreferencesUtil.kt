@@ -22,7 +22,7 @@ object SharedPreferencesUtil {
      * @param key     键
      * @param value   值
      */
-    fun writeData(context: Context, key: String, value: Any) {
+    fun <T> writeData(context: Context, key: String, value: T) {
         // 获取要存储数据的封装类名
         val sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
         val editor = sharedPreferences.edit()
@@ -45,9 +45,10 @@ object SharedPreferencesUtil {
      * @param defValue 当无法查到指定的键时岁返回的指定默认值
      * @return 存储的对象
      */
-    fun readData(context: Context, key: String, defValue: Any): Any? {
+    @Suppress("UNCHECKED_CAST")
+    fun <T> readData(context: Context, key: String, defValue: T): T? {
         val sharedPreferences = context.getSharedPreferences(FILE_NAME, Context.MODE_PRIVATE)
-        return when (defValue) {
+        val data = when (defValue) {
             is String -> sharedPreferences.getString(key, defValue)
             is Int -> sharedPreferences.getInt(key, defValue)
             is Float -> sharedPreferences.getFloat(key, defValue)
@@ -55,5 +56,6 @@ object SharedPreferencesUtil {
             is Long -> sharedPreferences.getLong(key, defValue)
             else -> null
         }
+        return data as T
     }
 }
